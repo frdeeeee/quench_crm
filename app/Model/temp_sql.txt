@@ -1,0 +1,1508 @@
+-- phpMyAdmin SQL Dump
+-- version 3.3.9.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Aug 20, 2012 at 02:09 AM
+-- Server version: 5.5.9
+-- PHP Version: 5.3.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `dep3ykdpvw4`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `audience` int(2) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `important` tinyint(4) NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `hits` int(11) NOT NULL,
+  `deadline` date NOT NULL COMMENT '发布的截止日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `announcements`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answers`
+--
+
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` VALUES(1, '暂定报名');
+INSERT INTO `answers` VALUES(2, '尚不报名');
+INSERT INTO `answers` VALUES(3, '未联系上');
+INSERT INTO `answers` VALUES(4, '转为明年');
+INSERT INTO `answers` VALUES(5, '转为短期实习');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicants`
+--
+
+CREATE TABLE `applicants` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usa_informed` tinyint(4) DEFAULT '0' COMMENT '行程提交外方',
+  `enquiry_id` int(11) NOT NULL DEFAULT '0',
+  `slep` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'SLEP',
+  `application_data` int(4) NOT NULL DEFAULT '0' COMMENT '申请材料',
+  `project_data` tinyint(4) NOT NULL COMMENT '安置资料是否完备',
+  `visa_data` tinyint(4) DEFAULT '0' COMMENT '签证资料是否完备',
+  `orgnization_id` int(11) DEFAULT NULL,
+  `visa_signed_date` date DEFAULT NULL,
+  `visa_status` int(11) NOT NULL DEFAULT '1' COMMENT '签证情况',
+  `job_status` int(11) NOT NULL DEFAULT '1' COMMENT '工作岗位',
+  `departure_date` date DEFAULT NULL,
+  `comments` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `group_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL DEFAULT '0',
+  `task_id` int(11) NOT NULL DEFAULT '0',
+  `source_id` int(11) NOT NULL DEFAULT '0',
+  `status` int(2) NOT NULL COMMENT '0表示正常',
+  `father_name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `father_mobile` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `father_company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mother_name` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mother_mobile` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mother_company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emergency_contact` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emergency_relation` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emergency_speak_en` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `emergency_mobile` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phase_id` int(11) NOT NULL DEFAULT '2',
+  `return_status_id` int(11) DEFAULT NULL COMMENT '回国登记',
+  `return_date` date DEFAULT NULL COMMENT '回国日期',
+  `project_status_id` int(11) DEFAULT NULL COMMENT '项目情况',
+  `homestay_ok` tinyint(4) DEFAULT '0' COMMENT '临行时是否与寄宿家庭交接完毕',
+  `job_offer_upload_oversea_status` int(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+
+--
+-- Dumping data for table `applicants`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicant_files`
+--
+
+CREATE TABLE `applicant_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) NOT NULL,
+  `file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phase_id` int(11) DEFAULT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `latest_comments` text COLLATE utf8_unicode_ci COMMENT '最后一次对这个文件的说明',
+  `download_file_id` int(11) NOT NULL,
+  `is_readed` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否老师看过了',
+  `is_passed` tinyint(4) NOT NULL DEFAULT '0' COMMENT '审核结果，默认不通过',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `applicant_files`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicant_file_types`
+--
+
+CREATE TABLE `applicant_file_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `comment` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `applicant_file_types`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicant_itinerary`
+--
+
+CREATE TABLE `applicant_itinerary` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) NOT NULL,
+  `depart_datetime` datetime DEFAULT NULL COMMENT '从中国出发日期',
+  `arrive_datetime` datetime DEFAULT NULL COMMENT '到达美国时间',
+  `arrive_city` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '到达美国的第一个城市',
+  `air_company_go` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '去程航空公司',
+  `air_code_go` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '去程航班号',
+  `how_to_meet` text COLLATE utf8_unicode_ci COMMENT '到达雇主处的方式',
+  `is_pick_up` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '雇主是否来接',
+  `depart_city` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '从中国起飞的城市',
+  `return_depart_city` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '回程出发城市',
+  `return_arrive_date` date DEFAULT NULL COMMENT '回程到达日期',
+  `return_arrive_city` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '回程抵达城市',
+  `air_code_return` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '回程航班号',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT 'who input this record',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `applicant_itinerary`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicant_jobs`
+--
+
+CREATE TABLE `applicant_jobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `job_title` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `company_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `employer_address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `city_name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `street_name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `employer_name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `offer_file_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `working_content` text COLLATE utf8_unicode_ci NOT NULL,
+  `provide_accom` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否提供住宿',
+  `start_from` date DEFAULT NULL COMMENT '开始工作日期',
+  `end_by` date DEFAULT NULL COMMENT '工作结束日期',
+  `interview` tinyint(4) NOT NULL DEFAULT '0',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `applicant_jobs`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applicant_visas`
+--
+
+CREATE TABLE `applicant_visas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `applicant_id` int(11) NOT NULL,
+  `visa_traing_date` date DEFAULT NULL,
+  `training_method_id` int(11) DEFAULT NULL,
+  `visa_appointment_date` date DEFAULT NULL,
+  `embassy_id` int(11) DEFAULT NULL,
+  `embassy_address` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_training_date` date DEFAULT NULL,
+  `last_training_address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `departure_date` date DEFAULT NULL,
+  `return_date` date DEFAULT NULL,
+  `itinery_file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `comments` text COLLATE utf8_unicode_ci NOT NULL,
+  `is_passport_ok` tinyint(4) DEFAULT NULL COMMENT '护照',
+  `visa_fee_billing` tinyint(4) DEFAULT NULL COMMENT '签证费缴费单',
+  `is_photo_ok` tinyint(4) DEFAULT NULL COMMENT '签证照',
+  `is_application_form_ok` tinyint(4) DEFAULT NULL COMMENT '签证申请表',
+  `is_father_income_ok` tinyint(4) DEFAULT NULL COMMENT '父亲收入证明',
+  `is_mother_income_ok` tinyint(4) DEFAULT NULL COMMENT '母亲收入证明',
+  `is_bank_deposit1_ok` tinyint(4) DEFAULT NULL COMMENT '银行收入1',
+  `is_bank_deposit2_ok` tinyint(4) DEFAULT NULL COMMENT '银行收入2',
+  `others` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '其它',
+  `sevis` tinyint(4) NOT NULL DEFAULT '0',
+  `ds2019` tinyint(4) NOT NULL DEFAULT '0',
+  `form160` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `applicant_visas`
+--
+
+INSERT INTO `applicant_visas` VALUES(3, 27, '2012-07-18', NULL, '2012-08-06', NULL, '', '0000-00-00', '', '0000-00-00', '0000-00-00', '', '2012-08-06', '2012-08-06', 9, '', 1, 1, 1, 1, 1, 1, 1, 1, '', 0, 0, 0);
+INSERT INTO `applicant_visas` VALUES(4, 31, '0000-00-00', 2, '2012-09-01', 2, '', '0000-00-00', '', '0000-00-00', '0000-00-00', '', '2012-08-15', '2012-08-18', 14, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 0, 1);
+INSERT INTO `applicant_visas` VALUES(5, 29, '2013-01-01', NULL, '2013-01-01', NULL, '', '0000-00-00', '', '0000-00-00', '2013-06-03', '', '2012-08-18', '2012-08-18', 0, '', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 0, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `apply_fee_status`
+--
+
+CREATE TABLE `apply_fee_status` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='代表学生报名费的缴费状态的表格' AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `apply_fee_status`
+--
+
+INSERT INTO `apply_fee_status` VALUES(1, '等待提交报名费');
+INSERT INTO `apply_fee_status` VALUES(2, '已缴报名费');
+INSERT INTO `apply_fee_status` VALUES(3, '退出未缴款');
+INSERT INTO `apply_fee_status` VALUES(4, '退出等待退款');
+INSERT INTO `apply_fee_status` VALUES(5, '退出已退款');
+INSERT INTO `apply_fee_status` VALUES(6, '其它');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channels`
+--
+
+CREATE TABLE `channels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `channels`
+--
+
+INSERT INTO `channels` VALUES(1, '宣讲会');
+INSERT INTO `channels` VALUES(2, '自主报名');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkins`
+--
+
+CREATE TABLE `checkins` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `enquiry_id` int(10) unsigned NOT NULL,
+  `is_job_location_changed` tinyint(4) NOT NULL DEFAULT '0',
+  `new_job_location` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `job_description` text COLLATE utf8_unicode_ci,
+  `is_accom_changed` tinyint(4) NOT NULL DEFAULT '0',
+  `new_accom` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `accom_cond_changed` tinyint(4) NOT NULL DEFAULT '0',
+  `new_accom_cond` text COLLATE utf8_unicode_ci,
+  `living_notes` text COLLATE utf8_unicode_ci COMMENT '生活方面有何问题',
+  `job_notes` text COLLATE utf8_unicode_ci COMMENT '工作方面有何问题',
+  `is_social` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否参加文化交流活动',
+  `social_desc_1` text COLLATE utf8_unicode_ci COMMENT '文化交流活动1',
+  `social_desc_2` text COLLATE utf8_unicode_ci COMMENT '文化交流活动2',
+  `comments` text COLLATE utf8_unicode_ci COMMENT '对项目有何感受或建议',
+  `created` date NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `enquiry_id` (`enquiry_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `checkins`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkin_photos`
+--
+
+CREATE TABLE `checkin_photos` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `enquiry_id` int(11) unsigned NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `file_path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `file_size` int(10) unsigned NOT NULL DEFAULT '0',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `checkin_photos`
+--
+
+INSERT INTO `checkin_photos` VALUES(6, 10009, 'ttt', '240x90.gif', 1156, '2012-08-14', '2012-08-14', 'ddd');
+INSERT INTO `checkin_photos` VALUES(7, 10009, 'ttt', '60x60.gif', 426, '2012-08-14', '2012-08-14', 'ddd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `client_types`
+--
+
+CREATE TABLE `client_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `client_types`
+--
+
+INSERT INTO `client_types` VALUES(1, '新客户');
+INSERT INTO `client_types` VALUES(2, '老客户');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `department` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `manager` varchar(40) COLLATE utf8_unicode_ci DEFAULT '',
+  `mobile` varchar(11) COLLATE utf8_unicode_ci DEFAULT '',
+  `office` varchar(12) COLLATE utf8_unicode_ci DEFAULT '',
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT '',
+  `fax` varchar(12) COLLATE utf8_unicode_ci DEFAULT '',
+  `user_id` int(11) NOT NULL,
+  `created` int(11) NOT NULL,
+  `modified` int(11) NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `contacts`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contract_status`
+--
+
+CREATE TABLE `contract_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='学生的协议当前的状态' AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `contract_status`
+--
+
+INSERT INTO `contract_status` VALUES(1, '等待中');
+INSERT INTO `contract_status` VALUES(2, '已签协议');
+INSERT INTO `contract_status` VALUES(3, '退出');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `province_id` int(2) NOT NULL,
+  `customerType_id` int(2) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT '未知',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT '1',
+  `comments` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `customers`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_types`
+--
+
+CREATE TABLE `customer_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `customer_types`
+--
+
+INSERT INTO `customer_types` VALUES(1, '学校');
+INSERT INTO `customer_types` VALUES(2, '代理');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `departments`
+--
+
+CREATE TABLE `departments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` VALUES(1, '总部');
+INSERT INTO `departments` VALUES(2, '销售部');
+INSERT INTO `departments` VALUES(3, '运营部');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `download_files`
+--
+
+CREATE TABLE `download_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `file_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mimeType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phase_id` int(11) NOT NULL DEFAULT '2',
+  `project_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=57 ;
+
+--
+-- Dumping data for table `download_files`
+--
+
+INSERT INTO `download_files` VALUES(42, '财产证明-模板3.JPG', '财产证明-模板3.JPG', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(39, '美国签证申请表-模板.pdf', '美国签证申请表-模板.pdf', 'application/pdf', 4, 1, 0);
+INSERT INTO `download_files` VALUES(40, '财产证明-模板1.jpg', '财产证明-模板1.jpg', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(41, '财产证明-模板2.jpg', '财产证明-模板2.jpg', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(37, '父母在职+收入证明-模板2.jpg', '父母在职+收入证明-模板2.jpg', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(38, '签证费缴费收据扫描-模板.jpg', '签证费缴费收据扫描-模板.jpg', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(36, '父母在职+收入证明-模板1.jpg', '父母在职+收入证明-模板1.jpg', 'image/jpeg', 4, 1, 0);
+INSERT INTO `download_files` VALUES(54, '雇主回传的Job Offer扫描件', '', '', 3, 1, 0);
+INSERT INTO `download_files` VALUES(33, '英文简历-模板.doc', '英文简历-模板.doc', 'application/msword', 2, 1, 0);
+INSERT INTO `download_files` VALUES(32, '英文申请表-模板.doc', '英文申请表-模板.doc', 'application/msword', 2, 1, 0);
+INSERT INTO `download_files` VALUES(31, '给雇主的一封信-模板.doc', '给雇主的一封信-模板.doc', 'application/msword', 2, 1, 0);
+INSERT INTO `download_files` VALUES(30, '在读及放假证明-模板.jpg', '在读及放假证明-模板.jpg', 'image/jpeg', 2, 1, 0);
+INSERT INTO `download_files` VALUES(29, '在读及放假证明-模板.docx', '在读及放假证明-模板.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 2, 1, 0);
+INSERT INTO `download_files` VALUES(28, '个人资产证明（8000）-模板2.jpg', '个人资产证明（8000）-模板2.jpg', 'image/jpeg', 2, 1, 0);
+INSERT INTO `download_files` VALUES(27, '个人资产证明（8000）-模板1.jpg', '个人资产证明（8000）-模板1.jpg', 'image/jpeg', 2, 1, 0);
+INSERT INTO `download_files` VALUES(43, '电子行程单-模板.doc', '电子行程单-模板.doc', 'application/msword', 5, 1, 0);
+INSERT INTO `download_files` VALUES(44, '护照入境章-模板.jpg', '护照入境章-模板.jpg', 'image/jpeg', 7, 1, 0);
+INSERT INTO `download_files` VALUES(45, '雇主评价表（1）-模板.jpg', '雇主评价表（1）-模板.jpg', 'image/jpeg', 7, 1, 0);
+INSERT INTO `download_files` VALUES(46, '雇主评价表（2）-模板.jpg', '雇主评价表（2）-模板.jpg', 'image/jpeg', 7, 1, 0);
+INSERT INTO `download_files` VALUES(48, '请上传中文报名表 (DOC)', '', '', 2, 1, 0);
+INSERT INTO `download_files` VALUES(49, '2寸白底微笑照（JPG）', '', '', 2, 1, 0);
+INSERT INTO `download_files` VALUES(50, '护照首页（JPG)', '', '', 2, 1, 0);
+INSERT INTO `download_files` VALUES(52, '户口本人页（JPG）', '', '', 2, 1, 0);
+INSERT INTO `download_files` VALUES(53, '身份证（JPG）', '', '', 2, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `embassys`
+--
+
+CREATE TABLE `embassys` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='签证使馆' AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `embassys`
+--
+
+INSERT INTO `embassys` VALUES(1, '秀水东路');
+INSERT INTO `embassys` VALUES(2, '安家楼');
+INSERT INTO `embassys` VALUES(3, '其他');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enquiries`
+--
+
+CREATE TABLE `enquiries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_id` int(10) unsigned DEFAULT NULL,
+  `school` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '学校名称，如果customer中没有对应的',
+  `grade` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `major` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `source_id` int(11) NOT NULL COMMENT '报名渠道',
+  `presentation_id` int(11) DEFAULT NULL COMMENT '报名途径',
+  `comments` text COLLATE utf8_unicode_ci,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `is_viewed_by_operation` tinyint(4) NOT NULL DEFAULT '0',
+  `gender` tinyint(4) DEFAULT '0',
+  `status` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL DEFAULT '0',
+  `exam_date` date NOT NULL,
+  `slep_scores` int(3) NOT NULL DEFAULT '0' COMMENT 'SLEP考试成绩',
+  `is_feedback` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'is feedback by oper',
+  `is_applicant` tinyint(4) NOT NULL DEFAULT '0' COMMENT '该学生是否进入申请阶段',
+  `intention_oversea` tinyint(4) NOT NULL DEFAULT '0' COMMENT '留学意向',
+  `intention_internship` tinyint(4) NOT NULL DEFAULT '0' COMMENT '国内实习意向',
+  `others_interesting` text COLLATE utf8_unicode_ci COMMENT '还希望了解哪些',
+  `how_to_konw_youthedu` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '如何知道优势的',
+  `province_id` int(11) NOT NULL DEFAULT '0',
+  `city_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `identification` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apply_fee` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apply_fee_receipt` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apply_fee_comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apply_fee_type` int(11) DEFAULT NULL,
+  `apply_fee_received` date DEFAULT NULL,
+  `apply_fee_payer` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apply_fee_status_id` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '代表缴费状态，默认为1',
+  `project_fee` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `project_fee_receipt` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `project_fee_comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `project_fee_type` int(11) DEFAULT NULL,
+  `project_fee_received` date DEFAULT NULL,
+  `project_fee_payer` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `project_fee_status_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `contract_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sign_date` date DEFAULT NULL,
+  `contract_status_id` int(11) NOT NULL DEFAULT '1' COMMENT '学生是否签订协议的状态表示',
+  `contract_comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10018 ;
+
+--
+-- Dumping data for table `enquiries`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enquiry_feedbacks`
+--
+
+CREATE TABLE `enquiry_feedbacks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enquiry_id` int(11) NOT NULL,
+  `answer_id` int(11) NOT NULL,
+  `reason_id` int(11) NOT NULL,
+  `comments` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `operator_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data for table `enquiry_feedbacks`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fee_types`
+--
+
+CREATE TABLE `fee_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `fee_types`
+--
+
+INSERT INTO `fee_types` VALUES(1, '人民币现金');
+INSERT INTO `fee_types` VALUES(2, '人民币汇款');
+INSERT INTO `fee_types` VALUES(3, '美元现金');
+INSERT INTO `fee_types` VALUES(4, '美元汇款');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `group_leader` int(11) NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT '1',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` VALUES(14, '张梓萍工作组', 21, 1, '2012-08-06 13:45:05', '2012-08-06 13:45:05');
+INSERT INTO `groups` VALUES(15, '潘伟斌工作组', 22, 1, '2012-08-06 15:11:18', '2012-08-06 15:11:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_users`
+--
+
+CREATE TABLE `group_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_group_users_groups` (`group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `group_users`
+--
+
+INSERT INTO `group_users` VALUES(15, 14, 21);
+INSERT INTO `group_users` VALUES(16, 14, 24);
+INSERT INTO `group_users` VALUES(17, 14, 25);
+INSERT INTO `group_users` VALUES(18, 15, 22);
+INSERT INTO `group_users` VALUES(19, 15, 25);
+INSERT INTO `group_users` VALUES(20, 14, 23);
+INSERT INTO `group_users` VALUES(21, 15, 23);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_status`
+--
+
+CREATE TABLE `job_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `job_status`
+--
+
+INSERT INTO `job_status` VALUES(1, '待定');
+INSERT INTO `job_status` VALUES(2, '已有');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meetings`
+--
+
+CREATE TABLE `meetings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hold_on` datetime NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `sponsor` int(11) NOT NULL,
+  `agenda` text COLLATE utf8_unicode_ci,
+  `status` int(11) NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `meeting_minutes` int(11) DEFAULT NULL,
+  `location` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `meetings`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting_minutes`
+--
+
+CREATE TABLE `meeting_minutes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `meeting_id` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_meeting_minutes_meetings` (`meeting_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `meeting_minutes`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting_users`
+--
+
+CREATE TABLE `meeting_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meeting_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `hold_on` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_meeting_users_meetings` (`meeting_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+
+--
+-- Dumping data for table `meeting_users`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `receiver_id` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `is_read` tinyint(4) NOT NULL DEFAULT '0',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
+
+--
+-- Dumping data for table `messages`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `user_id` int(11) NOT NULL COMMENT 'which user',
+  `tag_id` int(11) NOT NULL COMMENT 'the tag',
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `on_desktop` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'on desktop always',
+  `is_cool` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'important',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
+
+--
+-- Dumping data for table `notes`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orgnizations`
+--
+
+CREATE TABLE `orgnizations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `orgnizations`
+--
+
+INSERT INTO `orgnizations` VALUES(1, 'Spirit');
+INSERT INTO `orgnizations` VALUES(2, 'CCI');
+INSERT INTO `orgnizations` VALUES(3, '自我安置');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phases`
+--
+
+CREATE TABLE `phases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `phases`
+--
+
+INSERT INTO `phases` VALUES(1, '报名');
+INSERT INTO `phases` VALUES(2, '申请');
+INSERT INTO `phases` VALUES(3, '安置');
+INSERT INTO `phases` VALUES(4, '签证');
+INSERT INTO `phases` VALUES(5, '行前');
+INSERT INTO `phases` VALUES(6, '赴美');
+INSERT INTO `phases` VALUES(7, '回国');
+INSERT INTO `phases` VALUES(8, '退出');
+INSERT INTO `phases` VALUES(9, '其它');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `presentations`
+--
+
+CREATE TABLE `presentations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hold_on` date NOT NULL,
+  `customer_id` int(11) NOT NULL COMMENT '哪个学校',
+  `speaker` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `manager` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `student_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '互动学生',
+  `contact_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `dept_name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `contact_phone` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `projects` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `channels` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `arrived_number` int(11) NOT NULL,
+  `regist_number` int(11) NOT NULL,
+  `exam_date` date NOT NULL,
+  `summary` text COLLATE utf8_unicode_ci NOT NULL,
+  `comments` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT '1',
+  `status` int(11) NOT NULL DEFAULT '1',
+  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `presentations`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `profiles`
+--
+
+CREATE TABLE `profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enquiry_id` int(11) unsigned NOT NULL,
+  `is_itinerary_right` tinyint(4) NOT NULL DEFAULT '1',
+  `itinerary_notes` text COLLATE utf8_unicode_ci,
+  `is_sevis_on` tinyint(4) DEFAULT NULL,
+  `sevis_notes` text COLLATE utf8_unicode_ci,
+  `is_social_insu_on` tinyint(4) DEFAULT '0',
+  `social_insu_notes` text COLLATE utf8_unicode_ci,
+  `job_location` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '工作地点',
+  `job_description` text COLLATE utf8_unicode_ci COMMENT '工作内容',
+  `accommodation` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '住宿地点',
+  `accom_conditions` text COLLATE utf8_unicode_ci NOT NULL COMMENT '住宿条件',
+  `status` int(3) NOT NULL DEFAULT '0',
+  `teacher_notes` text COLLATE utf8_unicode_ci,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `enquiry_id` (`enquiry_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `profiles`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `target` int(11) NOT NULL DEFAULT '0',
+  `assigned` int(11) NOT NULL DEFAULT '0',
+  `comments` text COLLATE utf8_unicode_ci,
+  `deadline` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` VALUES(1, '暑期带薪实习(SWT)', 200, 200, '赴美带薪实习是基于美国政府在1948年通过的信息及教育交流法案而设立的文化交流项目，允许国际青年人进入美国从事短期工作和旅游，旨在促进国际青年文化交流，并于1961年被纳入并扩展为美国联邦教育及文化平等交流法案（Fulbright-Hayes Act）。此项目在中国大陆推广之前，已经在欧洲、美洲及亚洲其他国家和地区成功运作了50余年，每年6月有数万年轻人持J-1签证进入美国，进行为期3个月的实习。学生赴美国后，一边在美国劳动制度保障下工作，与同级别的美国员工同工同酬，赚取生活费用，一边可亲身经历体验美国式的生活，了解美国风土人情。在工作和社会环境中提高英语交流能力，开阔视野，结交国际友人，增长知识。', '2012-08-06');
+INSERT INTO `projects` VALUES(2, '短期实习(STEP)', 100, 0, '优势-短期赴美实习项目目的在于为青年大学生提供一个到美国企业，学校或非营利性机构接受与自己专业有关的职业培训机会。参加该项目的实习生可以根据所学专长，在美国 获得为期1个月—3个月的无薪实习培训机会，以获得实习生本专业的工作技能、海外工作经验、了解美国专业领域的发展及运作方式，并可经过语言课程和求职课程的锻炼。此外，实习生能通过在美国的实习生活，不但充分体验美国的多元文化特征，更进一步认识美国、了解美国，真正体验高阶层的实习。这一过程将这些年轻人的学习和未来的职业紧紧地联系在了一起。通过参加这个项目，实习生可以在专业的领域中获得知识和锻炼，同时也可以获得国际文化和商业意识的体验。', '2012-12-31');
+INSERT INTO `projects` VALUES(3, '专业实习(INTERN)', 100, 0, '海外专业实习项目是美国联邦教育及文化平等交流法案（Fulbright-Hayes Act）的框架下，制定的一项针对国际实习生赴美企业进行专业化实习的项目,同时它也是进行文化交流、文化沟通的一个桥梁。这将有助于学员对所学专业有所提高和突破，拓展良好的职业发展空间，积累丰富的国际工作经验与人脉关系，帮助学生快速成为国际竞争力的优势人才。专业实习项目可以让参加者深入了解海外企业的专业领域前沿技术和优良的管理模式。美国政府鼓励美国企业向来自世界各国的有志青年开放岗位，为企业注入新的活力与灵感；同时美国企业完善的实习生制度提供了充分的培训和指导，使实习生得到系统的训练和提升。持有J-1签证，申请人以交流访问学者的身份进入美国，从事与专业相关的实习工作。专业实习为申请人的职业规划提供了良好的学习和储备平台，帮助实习生完善专业知识，提高专业技能，实现专业领域的突破。在美国的实习结束后，这些收获和海外企业的实习经验无疑是申请人未来求职和职业发展中的精彩亮点。', '2012-12-31');
+INSERT INTO `projects` VALUES(4, '夏令营', 100, 0, '优势办在美国纽约、旧金山以及其他国家组织了2-3周的语言强化夏令营，对学生的口语、听力、语法、写作和阅读技巧进行有针对的教学，安排了良好的住宿和饮食，24小时的全程监管，全程医疗保险，在课程结束后颁发证书。\r\n\r\n在海外夏令营，同学们将在领队，教职人员的悉心照料下，与来自世界各地的中学生一起度过愉快的2-3周。整个行程围绕英语课程展开，课程由经验丰富的当地老师讲授，教材生动活泼，下午安排了丰富多彩的观光游乐活动，享受海外明媚的阳光。在活动中应用英语，会使暑期英语学习收到事半功倍的效果。', '2012-12-31');
+INSERT INTO `projects` VALUES(5, '高中生赴美', 100, 0, '中美学生交流计划是美国国务院于第二次世界大战之后设立的，该计划旨在通过每年从世界各国招收优秀学生到美国高中就读，从而加深世界各国人民之间的了解。已加入该计划的国家有加拿大、墨西哥、巴西、韩国、日本、德国、丹麦、法国、南非、中国及台湾地区等。\r\n\r\n\r\n中国交流学生将在传统的美国家庭里生活，在美国高中就读。交流学生在接受当地教育，与美国家庭共同生活的同时，增进中美两国间在教育和文化领域的国际交流。同时，该项目能够有效的提高访问学生的英语水平，培养她们的独立生活能力和交往能力，切身感受美国的素质教育。', '2012-12-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_fee_status`
+--
+
+CREATE TABLE `project_fee_status` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `project_fee_status`
+--
+
+INSERT INTO `project_fee_status` VALUES(1, '等待缴纳');
+INSERT INTO `project_fee_status` VALUES(2, '已缴');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_status`
+--
+
+CREATE TABLE `project_status` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `project_status`
+--
+
+INSERT INTO `project_status` VALUES(1, '进行中');
+INSERT INTO `project_status` VALUES(2, '正常完成');
+INSERT INTO `project_status` VALUES(3, '按程序提前结束');
+INSERT INTO `project_status` VALUES(4, '擅自提前结束');
+INSERT INTO `project_status` VALUES(5, '逾期不归');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `provinces`
+--
+
+CREATE TABLE `provinces` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+
+--
+-- Dumping data for table `provinces`
+--
+
+INSERT INTO `provinces` VALUES(1, '北京');
+INSERT INTO `provinces` VALUES(3, '山西');
+INSERT INTO `provinces` VALUES(4, '内蒙古');
+INSERT INTO `provinces` VALUES(5, '河北');
+INSERT INTO `provinces` VALUES(7, '天津');
+INSERT INTO `provinces` VALUES(8, '辽宁');
+INSERT INTO `provinces` VALUES(9, '黑龙江');
+INSERT INTO `provinces` VALUES(47, '吉林');
+INSERT INTO `provinces` VALUES(11, '山东');
+INSERT INTO `provinces` VALUES(14, '上海');
+INSERT INTO `provinces` VALUES(15, '江苏');
+INSERT INTO `provinces` VALUES(18, '浙江');
+INSERT INTO `provinces` VALUES(21, '湖北');
+INSERT INTO `provinces` VALUES(23, '湖南');
+INSERT INTO `provinces` VALUES(24, '江西');
+INSERT INTO `provinces` VALUES(25, '安徽');
+INSERT INTO `provinces` VALUES(26, '河南');
+INSERT INTO `provinces` VALUES(28, '广东');
+INSERT INTO `provinces` VALUES(30, '福建');
+INSERT INTO `provinces` VALUES(32, '广西');
+INSERT INTO `provinces` VALUES(33, '海南');
+INSERT INTO `provinces` VALUES(34, '云南');
+INSERT INTO `provinces` VALUES(35, '贵州');
+INSERT INTO `provinces` VALUES(36, '重庆');
+INSERT INTO `provinces` VALUES(37, '四川');
+INSERT INTO `provinces` VALUES(39, '西藏');
+INSERT INTO `provinces` VALUES(40, '甘肃');
+INSERT INTO `provinces` VALUES(41, '陕西');
+INSERT INTO `provinces` VALUES(42, '宁夏');
+INSERT INTO `provinces` VALUES(43, '青海');
+INSERT INTO `provinces` VALUES(44, '新疆');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reasons`
+--
+
+CREATE TABLE `reasons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `reasons`
+--
+
+INSERT INTO `reasons` VALUES(1, '报名');
+INSERT INTO `reasons` VALUES(2, '费用太高，不参加');
+INSERT INTO `reasons` VALUES(3, '父母不同意');
+INSERT INTO `reasons` VALUES(4, '假期另有安排');
+INSERT INTO `reasons` VALUES(5, '其他');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `results`
+--
+
+CREATE TABLE `results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` VALUES(1, '暂定报名');
+INSERT INTO `results` VALUES(2, '尚不报名');
+INSERT INTO `results` VALUES(3, '未联系上');
+INSERT INTO `results` VALUES(4, '转为明年');
+INSERT INTO `results` VALUES(5, '转为短期实习');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_status`
+--
+
+CREATE TABLE `return_status` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `return_status`
+--
+
+INSERT INTO `return_status` VALUES(1, '等待提交');
+INSERT INTO `return_status` VALUES(2, '等待审核');
+INSERT INTO `return_status` VALUES(3, '已通过');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` VALUES(1, '系统管理员');
+INSERT INTO `roles` VALUES(2, '销售总监');
+INSERT INTO `roles` VALUES(3, '运营总监');
+INSERT INTO `roles` VALUES(4, '项目经理');
+INSERT INTO `roles` VALUES(5, '运营经理');
+INSERT INTO `roles` VALUES(6, '销售助理');
+INSERT INTO `roles` VALUES(7, '运营助理');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `search_urls`
+--
+
+CREATE TABLE `search_urls` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=78 ;
+
+--
+-- Dumping data for table `search_urls`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sources`
+--
+
+CREATE TABLE `sources` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `sources`
+--
+
+INSERT INTO `sources` VALUES(1, '代理');
+INSERT INTO `sources` VALUES(2, '学校');
+INSERT INTO `sources` VALUES(3, '个人');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `states`
+--
+
+CREATE TABLE `states` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '美国的州名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=52 ;
+
+--
+-- Dumping data for table `states`
+--
+
+INSERT INTO `states` VALUES(1, 'ALABAMA, AL');
+INSERT INTO `states` VALUES(2, 'ALASKA, AK');
+INSERT INTO `states` VALUES(3, 'ARIZONA, AZ');
+INSERT INTO `states` VALUES(4, 'ARKANSAS, AR');
+INSERT INTO `states` VALUES(5, 'CALIFORNIA, CA');
+INSERT INTO `states` VALUES(6, 'COLORADO, CO');
+INSERT INTO `states` VALUES(7, 'CONNECTICUT, CT');
+INSERT INTO `states` VALUES(8, 'DELAWARE, DE');
+INSERT INTO `states` VALUES(9, 'DISTRICTO FCOLUMBIA, DC');
+INSERT INTO `states` VALUES(10, 'FLORIDA, FL');
+INSERT INTO `states` VALUES(11, 'GEORGIA, GA');
+INSERT INTO `states` VALUES(12, 'HAWAII, HI');
+INSERT INTO `states` VALUES(13, 'IDAHO, ID');
+INSERT INTO `states` VALUES(14, 'ILLINOIS, IL');
+INSERT INTO `states` VALUES(15, 'INDIANA, IN');
+INSERT INTO `states` VALUES(16, 'IOWA, IA');
+INSERT INTO `states` VALUES(17, 'KANSAS, KS');
+INSERT INTO `states` VALUES(18, 'KENTUCKY, KY');
+INSERT INTO `states` VALUES(19, 'LOUISIANA, LA');
+INSERT INTO `states` VALUES(20, 'MAINE, ME');
+INSERT INTO `states` VALUES(21, 'MARYLAND, MD');
+INSERT INTO `states` VALUES(22, 'MASSACHUSETTS, MA');
+INSERT INTO `states` VALUES(23, 'MICHIGAN, MI');
+INSERT INTO `states` VALUES(24, 'MINNESOTA, MN');
+INSERT INTO `states` VALUES(25, 'MISSISSIPPI, MS');
+INSERT INTO `states` VALUES(26, 'MISSOURI, MO');
+INSERT INTO `states` VALUES(27, 'MONTANA, MT');
+INSERT INTO `states` VALUES(28, 'NEBRASKA, NE');
+INSERT INTO `states` VALUES(29, 'NEVADA, NV');
+INSERT INTO `states` VALUES(30, 'NEW HAMPSHIRE, NH');
+INSERT INTO `states` VALUES(31, 'NEW JERESY, NJ');
+INSERT INTO `states` VALUES(32, 'NEW MEXICO, NM');
+INSERT INTO `states` VALUES(33, 'NEW YORK, NY');
+INSERT INTO `states` VALUES(34, 'NORTH CAROLINA, NC');
+INSERT INTO `states` VALUES(35, 'NORTH DAKOTA, ND');
+INSERT INTO `states` VALUES(36, 'OHIO, OH');
+INSERT INTO `states` VALUES(37, 'OKLAHOMA, OK');
+INSERT INTO `states` VALUES(38, 'OREGON, OR');
+INSERT INTO `states` VALUES(39, 'PENNSYLVANIA, PA');
+INSERT INTO `states` VALUES(40, 'RHODE ISLAND, RI');
+INSERT INTO `states` VALUES(41, 'SOUTH CAROLINA, SC');
+INSERT INTO `states` VALUES(42, 'SOUTH DAKOTA, SD');
+INSERT INTO `states` VALUES(43, 'TENNESSEE, TN');
+INSERT INTO `states` VALUES(44, 'TEXAS, TX');
+INSERT INTO `states` VALUES(45, 'UTAH, UT');
+INSERT INTO `states` VALUES(46, 'VERMONT, VT');
+INSERT INTO `states` VALUES(47, 'VIRGINIA, VA');
+INSERT INTO `states` VALUES(48, 'WASHINGTON, WA');
+INSERT INTO `states` VALUES(49, 'WEST VIRGINIA, WV');
+INSERT INTO `states` VALUES(50, 'WISCONSIN, WI');
+INSERT INTO `states` VALUES(51, 'WYOMING, WY');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `icon` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` VALUES(1, '报名学生相关', 'book.png');
+INSERT INTO `tags` VALUES(2, '申请阶段相关', 'money_2.png');
+INSERT INTO `tags` VALUES(3, '安置阶段相关', 'companies.png');
+INSERT INTO `tags` VALUES(4, '签证阶段相关', 'visa.png');
+INSERT INTO `tags` VALUES(5, '行前阶段相关', 'trolly.png');
+INSERT INTO `tags` VALUES(6, '赴美阶段相关', 'airplane.png');
+INSERT INTO `tags` VALUES(7, '学生回国相关', 'airplane.png');
+INSERT INTO `tags` VALUES(8, '学生回访相关', 'phone.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `target` int(11) NOT NULL,
+  `deadline` date NOT NULL,
+  `comments` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` VALUES(22, '2013年度SWT销售任务', 80, '2013-01-31', '负责区域：北京市、湖北省、湖南省\r\n\r\n下设销售助理：1人（兼负河南省）', '2012-08-06', '2012-08-06', 1, 21, 0);
+INSERT INTO `tasks` VALUES(23, '2013年STEP销售任务', 80, '2013-01-31', '负责省份：北京市、湖北省、湖南省\r\n\r\n下设：销售助理1人（兼负河南省）', '2012-08-06', '2012-08-09', 2, 21, 0);
+INSERT INTO `tasks` VALUES(24, '为潘伟斌创建的一个暑期带薪实习的测试任务', 40, '2012-12-30', '为潘伟斌创建的一个暑期带薪实习的测试任务，仅仅用于测试', '2012-08-09', '2012-08-09', 1, 22, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `texting_templates`
+--
+
+CREATE TABLE `texting_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `texting_templates`
+--
+
+INSERT INTO `texting_templates` VALUES(1, '参加完宣讲会的通知', '你好！\r\n感谢你参加FESCO优势项目办公室（YES）的暑期带薪宣讲会！\r\n为了使你能够更好的了解北京外企集团及我们的海外交流项目，优势办已将有关项目资料发往你的邮箱，请注意查收。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(2, '通过考试的通知', '你好！\r\n恭喜你通过了SLEP英语考试，详细情况请查看邮箱。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至\r\n');
+INSERT INTO `texting_templates` VALUES(3, '没通过考试的通知', '你好！\r\n很遗憾你没有通过SLEP英语考试，不能够继续参加今年的暑期赴美带薪实习项目。有关退款事宜请查看邮箱。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(4, '提醒缴纳项目费的通知', '你好！\r\n我们尚未收到你缴纳的项目费，为了不影响你在美的岗位匹配，请尽快缴纳项目费，以便我们为你发送岗位匹配所需的资料包，收到资料后我们才能为你匹配岗位。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(5, '提醒提交申请资料的通知', '你好！\r\n你的申请阶段资料还没有完全提交，请登录优势后台，完成申请阶段的资料提交。优势办还需为你们的资料进行审核、修改、美化、提交外方机构，只有准备了完整的资料包才能正式申请岗位。请尽快完成申请阶段的资料。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至\r\n');
+INSERT INTO `texting_templates` VALUES(6, '提交签证资料的通知', '你好！\r\n请按照项目手册上的指导，在后台上上传签证阶段资料。为避免耽误同学们申请签证，请尽快准备资料。提交后一周内请常上优势后台查看新消息。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(7, '提醒提交签证资料的通知', '你好！\r\n你的签证阶段资料还没有完全提交，请登录优势后台，按照项目手册和后台留言上的指导，在后台上上传签证阶段资料。为避免耽误同学们申请签证，请尽快准备资料。并在提交后一周内请常上优势后台查看新消息。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(8, '得到JOB OFFER的通知', '你好！\r\n你的JOBOFFER下来了！请登录优势后台下载，按照项目手册或模板的指导，在24小时内签字扫描上传，如不及时可能造成岗位丢失。如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至\r\n');
+INSERT INTO `texting_templates` VALUES(9, '给签证通过的同学的行前准备通知', '你好！\r\n恭喜你通过了面签，得到了赴美签证！\r\n目前，需要你完成五项工作，详情请查看邮箱和优势后台。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(10, '行前培训的通知1(前期安置并通过签证的同学)', '你好！\r\n优势办行前培训日程已发往你的邮箱，请及时查看。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至');
+INSERT INTO `texting_templates` VALUES(11, '学生正常结束项目回国后的通知', '你好！\r\n恭喜顺利完成暑期赴美带薪实习，欢迎回到祖国！\r\n请在优势后台上登记回国，并上传护照页入境章和雇主评估表，以便优势办向外方确认你的回国信息，并开具实习报告。同时请提交赴美感言和照片，发送至老师的邮箱。优势办会以同学们每次Check-In情况、感言和照片为参考，评选年度优秀学生。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至\r\n');
+INSERT INTO `texting_templates` VALUES(12, '给退款学生的通知', '你好！\r\n由于特殊原因, 你需要退出项目，优势办感到十分遗憾。下面按照协议中的退款流程，为你申请退款。\r\n已将退款申请表发至你的邮箱，请及时查看并填写。\r\n如有任何问题，欢迎咨询免费服务电话：4006-501-801或邮件至\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `training_methods`
+--
+
+CREATE TABLE `training_methods` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='签证培训方式' AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `training_methods`
+--
+
+INSERT INTO `training_methods` VALUES(1, '现场');
+INSERT INTO `training_methods` VALUES(2, 'Skype');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` VALUES(1, '闫昕', 'yanxin@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 1, 1, 1);
+INSERT INTO `users` VALUES(25, '运营测试', 'operation@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 3, 7, 1);
+INSERT INTO `users` VALUES(21, '张梓萍', 'zhangziping@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 2, 4, 1);
+INSERT INTO `users` VALUES(22, '潘伟斌', 'panweibin@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 2, 4, 1);
+INSERT INTO `users` VALUES(23, '吴可非', 'wukefei@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 3, 5, 1);
+INSERT INTO `users` VALUES(24, '项晗', 'xianghan@youth-edu.org', '28de5548e10df1447412b5e38449ff9259092157', 3, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visa_status`
+--
+
+CREATE TABLE `visa_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `visa_status`
+--
+
+INSERT INTO `visa_status` VALUES(1, '未开始申请');
+INSERT INTO `visa_status` VALUES(2, '通过');
+INSERT INTO `visa_status` VALUES(3, '等待第二次签证');
+INSERT INTO `visa_status` VALUES(4, '等待使馆通知');
+INSERT INTO `visa_status` VALUES(5, '退出');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workinglogs_feedbacks`
+--
+
+CREATE TABLE `workinglogs_feedbacks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `working_log_id` int(11) NOT NULL,
+  `content` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `workinglogs_feedbacks`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `working_logs`
+--
+
+CREATE TABLE `working_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL COMMENT '谁输入的该条记录',
+  `customer_id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `result` text COLLATE utf8_unicode_ci NOT NULL,
+  `questions` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
+  `next_appointment` date DEFAULT NULL,
+  `next_title` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `important` tinyint(4) NOT NULL DEFAULT '0',
+  `status` smallint(6) NOT NULL DEFAULT '0',
+  `new_feedback` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否有新的领导批示',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `working_logs`
+--
+
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `group_users`
+--
+ALTER TABLE `group_users`
+  ADD CONSTRAINT `FK_group_users_groups` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `meeting_minutes`
+--
+ALTER TABLE `meeting_minutes`
+  ADD CONSTRAINT `FK_meeting_minutes_meetings` FOREIGN KEY (`meeting_id`) REFERENCES `meetings` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `meeting_users`
+--
+ALTER TABLE `meeting_users`
+  ADD CONSTRAINT `FK_meeting_users_meetings` FOREIGN KEY (`meeting_id`) REFERENCES `meetings` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;

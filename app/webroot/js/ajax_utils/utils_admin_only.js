@@ -1,0 +1,9 @@
+$(document).ready(function(){
+	//管理员添加新项目的方法
+	if($("#admin_add_new_project").length>0){
+		$("#admin_add_new_project").fancybox();
+	}
+	if($(".assign_project_to_user").length>0){
+		$(".assign_project_to_user").fancybox();
+	}
+});

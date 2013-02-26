@@ -1,0 +1,1 @@
+<?php echo $this->element('tables/presentations/statistic_report'); ?>

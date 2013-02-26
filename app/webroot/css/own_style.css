@@ -1,0 +1,345 @@
+@CHARSET "UTF-8";
+.checkbox{
+	float: left;
+	margin-left:10px;
+}
+input[type=checkbox]{
+	margin-right:6px;
+	margin-top:0px;
+}
+.checkbox input{
+	float:left;
+}
+.checkbox label{
+	margin-top:2px;
+	float:left;
+}
+.action_trigger{
+	float: left;
+	border: solid 1px #ccc;
+	background-color: #9E253B;
+	width:70px;
+	height:20px;
+	margin-top:5px;
+	cursor:pointer;
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	padding-bottom:4px;
+	text-align: center;
+	color:#fff;
+}
+
+.actions_box{
+	border: solid 1px #ccc;
+	background-color: #fff;
+	width:160px;
+	min-height:100px;
+	cursor:pointer;
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	padding-bottom:4px;
+	z-index: 9999;
+	position: absolute;
+	top:10px;
+	left:10px;
+	display: none;
+}
+.action_btn{
+	display: block;
+	margin:5px;
+	clear: both;
+	border-bottom: solid 1px #ccc;
+	padding:5px;
+	letter-spacing:0px;
+}
+.action_btn:hover{
+	background-color: #9E253B;
+	color:#fff;
+}
+
+#exports_selector{
+	border: solid 1px #ccc;
+	background-color: #fff;
+	width:120px;
+	cursor:pointer;
+	z-index: 9999;
+	position: absolute;
+	top:10px;
+	left:10px;
+	display: none;
+}
+#exports_selector ul li{
+	list-style: none;
+	height:15px;
+	width:100px;
+	padding:10px;
+}
+#exports_selector ul li:hover{
+	background-color: #ccc;
+}
+.pagination_wrapper{
+	background-color: #4C5766;
+    background-image: -moz-linear-gradient(center top , #4C5766, #313841);
+    border-color: #313841;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 #000000;
+    width:100%;
+    height:20px;
+    padding:10px;
+}
+.pagination_info{
+	float: left;
+    line-height: 26px;
+}
+.pagination_btns_wrapper{
+	float: left;
+    margin-right: 0;
+}
+.pg_btn_first{
+	background-color: #DFE2E4;
+    background-image: none;
+    filter: none !important;
+    margin: 0;
+    padding: 3px 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid white;
+    color: #888888 !important;
+    margin-left: -1px;
+    opacity: 1;
+}
+.pg_btn_prev{
+    color: #888888 !important;
+    margin-left: -2px;
+    opacity: 1;
+    border:solid 1px #fff;
+    background-color: #DFE2E4;
+    background-image: none;
+    color: #333333;
+    filter: none !important;
+    padding: 3px 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.pg_btn_current{
+	background-color: #313841;
+    background-image: none;
+    border: 1px solid #000000;
+    color: #FFFFFF !important;
+    opacity: 1;
+    text-shadow: 0 1px 0 #000000;
+    margin-left:-1px;
+    color: #333333;
+    filter: none !important;
+    padding: 3px 10px;
+}
+.pg_btn{
+	background-color: #DFE2E4;
+    background-image: none;
+    border-color: white #AAAAAA #AAAAAA white;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    filter: none !important;
+    margin: 0;
+    padding: 3px 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.pg_btn_next{
+	background-color: #DFE2E4;
+    background-image: none;
+    border-color: white #AAAAAA #AAAAAA white;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    filter: none !important;
+    margin: 0px;
+    padding: 3px 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.pg_btn_last{
+	background-color: #DFE2E4;
+    background-image: none;
+    filter: none !important;
+    margin-left: 0px;
+    padding: 3px 10px;
+    text-shadow: 0 1px 0 #FFFFFF;
+    border-radius: 0 3px 3px 0;
+    border: 1px solid white;
+    color: #333333;
+    margin-left: -1px;
+    opacity: 1;
+}
+.short_message_btn{
+	margin:10px;
+	width:120px;
+	height:25px;
+	padding-top:5px;
+	background-color: #DFE2E4;
+	color:#191919;
+	text-align: center;
+	float:left;
+	cursor: pointer;
+	border: solid 1px #DFE2E4;
+}
+.short_message_btn:hover,.short_message_btn a:hover{
+	background-color: #171717;
+	color:#fff;
+}
+.input input[type=text],.input select,.section input[type=text]{
+	border: solid 1px #ccc;
+}
+table.static tbody tr:hover{
+	background-color: #F4EFEF;
+}
+.error-message{
+	float:left;
+	color: red;
+	font-weight: bold;
+}
+.notes{
+	color: green;
+	font-weight: bold;
+	cursor: pointer;
+}
+.mr_trigger input{
+	height:15px;
+	width:50px;
+	border:solid 1px #ccc;
+	margin:0px;
+	padding:0px;
+	color:red;
+}
+.photo_frame{
+	list-style: none;
+	width:150px;
+	height:auto;
+	margin:6px;
+	float:left;
+}
+.photo_frame p{
+	text-align: center;
+}
+#floating_box{
+	-moz-transition: left 0.4s ease 0s;
+    background-color: #EA5757 !important;
+    border: 0 none !important;
+    box-shadow: none !important;
+    display: block;
+    left: 600px;
+    margin: 0 !important;
+    padding: 10px 10px 10px 20px !important;
+    position: fixed !important;
+    top: 30 !important;
+    z-index: 999;
+    width:100px;
+    opacity: 0.9;
+    overflow: hidden;
+}
+#floating_box p{
+	line-height: 12px;
+	letter-spacing: 1px;
+	color:#fff;
+}
+.tb{
+	height:50px;
+	width:80px;
+	border:solid 1px #ccc;
+	float:left;
+	text-align: center;
+	vertical-align: middle;
+	padding:auto;
+	background-color: #68BFEA;
+}
+.tb_big{
+	height:50px;
+	width:162px;
+	border:solid 1px #ccc;
+	float:left;
+	text-align: center;
+	vertical-align: middle;
+	padding:auto;
+	background-color: #68BFEA;
+}
+.tb_inner_head{
+	height:25px;
+	border-bottom:solid 1px #ccc;
+	text-align: center;
+	vertical-align: middle;
+	padding:auto;
+	background-color: #68BFEA;
+}
+.tb_inner_sub_left{
+	height:25px;
+	width:80px;
+	text-align: center;
+	vertical-align: middle;
+	float:left;
+	border-right: solid 1px #ccc;
+	background-color: #68BFEA;
+}
+.tb_inner_sub_right{
+	height:25px;
+	width:80px;
+	text-align: center;
+	vertical-align: middle;
+	float:left;
+	background-color: #68BFEA;
+}
+.tb_v{
+	height:25px;
+	width:80px;
+	text-align: center;
+	vertical-align: middle;
+	float:left;
+	border: solid 1px #ccc;
+}
+#toggle_floating_box{
+	float:left;
+	width:10px;
+	height:10px;
+	color:#fff;
+	margin-top:-13px;
+	margin-left:-14px;
+	font-size: 16px;
+	cursor: pointer;
+}
+/*将jquery的dialog中的按钮的文字颜色进行改变*/
+.ui-dialog-buttonset .ui-button .ui-button-text{
+	color:#fff;
+}
+/**/
+.quick_search_form_wrapper{
+	float:right;
+	padding:12px;
+}
+.quick_search_form_wrapper form input{
+	float:left;
+	width:300px;
+	height:23px;
+	margin-right:1px;
+}
+#checkin_trigger,#checkout_trigger{
+	background-color: transparent;
+    background-image: none;
+    border-color: #333333 #333333 rgba(0, 0, 0, 0.5) !important;
+    border-radius: 0 0 0 0;
+    border-style: solid !important;
+    border-width: 0 0 1px !important;
+    color: #EEEEEE !important;
+    filter: none;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 32px;
+    text-shadow: 0 1px 0 #000000 !important;
+    padding-left:10px;
+    cursor: pointer;
+}
+.fixed_at_bottom{
+	position: fixed;
+	z-index:9999;
+	bottom: 0px;
+	right:10px;
+	background-color: rgba(0, 0, 0, 0.75);
+	padding:10px;
+	height:30px;
+}
