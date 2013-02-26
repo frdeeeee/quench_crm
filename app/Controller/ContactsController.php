@@ -34,11 +34,11 @@ class ContactsController extends AppController{
 		//取出联系人表格中所有firstname长度大于0的纪录的id字段和firstname字段，按照firstname字段排序
 		
 		if (is_null($lead_id) && is_null($type_id)) {
-			$conditions = array('length(Contact.first_name)>1');
+			$conditions = array('length(Contact.company)>1');
 		}else{
 			$conditions = array(
 				'AND'=>array(
-					'length(Contact.first_name)>1',
+					'length(Contact.company)>1',
 					($lead_id)?'Contact.lead_id='.$lead_id:NULL,
 					($type_id)?'Contact.type_id='.$type_id:NULL
 				)
@@ -49,13 +49,13 @@ class ContactsController extends AppController{
 		$tmp_data = $this->Contact->find('all',array(
 			'fields'=>array('id','first_name','middle_name','last_name','company','status','lead_id'),
 			'conditions'=>$conditions,
-			'order'=>array('Contact.first_name'=>'ASC')
+			'order'=>array('Contact.company'=>'ASC')
 		));
 		
 		$current_index = 0;
 		foreach ($first_letters_upper as $key => $upper_letter){
 			for ( $i = 0; $i < count($tmp_data); $i++) {
-				if (substr( ucfirst( $tmp_data[$i]['Contact']['first_name']) ,0,1) == $upper_letter) {
+				if (substr( ucfirst( $tmp_data[$i]['Contact']['company']) ,0,1) == $upper_letter) {
 					//首字母相同，则加入小写字母的数组中
 					$data[$first_letters[$key]][] = $tmp_data[$i];
 					//unset($tmp_data[$i]);

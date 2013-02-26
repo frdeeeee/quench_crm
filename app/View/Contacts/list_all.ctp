@@ -29,10 +29,10 @@
 						  					.(($value['Contact']['status']==IS_CLIENT)?
 						  						$this->Html->image('icons/small/grey/admin_user.png',array('width'=>'16')).'&nbsp;&nbsp;':
 						  						NULL)
+						  					.$value['Contact']['company'].' '
 						  					.$value['Contact']['first_name'].' '
 						  					.$value['Contact']['middle_name'].' '
-						  					.$value['Contact']['last_name'].' '
-						  					.$value['Contact']['company'].$lead_str
+						  					.$value['Contact']['last_name'].$lead_str
 						  					.'</a></li>';
 						  				
 						  			}
